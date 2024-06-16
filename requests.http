@@ -1,2 +1,7 @@
 # Test express
 GET http://localhost:3000/ HTTP/1.1
+
+###
+
+#
+GET http://localhost:3000/countries?letters=A,Б,К&continents=North_America,South_America HTTP/1.1
