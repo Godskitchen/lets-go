@@ -3,7 +3,10 @@ import { StatusCodes } from './utils/constants';
 import { getCountryList } from './modules/countries/country.service';
 import { CountriesQuery, CountriesQuerySchema, CountriesResponseSchema } from './modules/countries/country.schema';
 import { CountryListQueryParser } from './modules/countries/country.prehandler';
-import { Continent } from './types';
+import { CreateCardDtoSchema } from './modules/cards/card.schema';
+import addErrors from 'ajv-errors';
+import { CardDateValidationPrehandler } from './modules/cards/card.prehandler';
+import { v4 as uuidv4 } from 'uuid';
 
 const loggerOptions = {
   transport: {
@@ -27,11 +30,13 @@ const loggerOptions = {
 const fastify = Fastify({
   ajv: {
     customOptions: {
+      allErrors: true,
       removeAdditional: 'all',
       coerceTypes: 'array',
       useDefaults: true,
       strictSchema: true,
-    }
+    },
+    plugins: [addErrors]
   },
   logger: loggerOptions
 });
@@ -48,6 +53,16 @@ fastify.get<{ Querystring: CountriesQuery }>(
   async ({query}, reply) => {
     const countrylist = getCountryList(query);
     reply.code(StatusCodes.OK).send(countrylist);
+  }
+);
+fastify.post(
+  '/users',
+  {
+    schema: {body: CreateCardDtoSchema},
+    preHandler: CardDateValidationPrehandler
+  },
+  async (req, reply) => {
+    reply.code(StatusCodes.OK).send(uuidv4());
   }
 );
 

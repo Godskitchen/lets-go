@@ -1,4 +1,4 @@
-import { Country } from './types';
+import { Country } from '../types';
 
 export const SortedCountries: Record<string, Country[]> = {
   'А': [
@@ -3322,3 +3322,7 @@ export const SortedCountries: Record<string, Country[]> = {
   ]
 };
 
+export const CountryNames = Object.values(SortedCountries).reduce<string[]>((rusNames, countries) => {
+  const names = countries.map((country) => country.name.rus);
+  return rusNames.concat(names);
+}, []);

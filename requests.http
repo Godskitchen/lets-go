@@ -3,5 +3,26 @@ GET http://localhost:3000/ HTTP/1.1
 
 ###
 
-#
+# Get countries
 GET http://localhost:3000/countries?letters=A,Б,К&continents=North_America,South_America HTTP/1.1
+
+
+###
+
+# Create card
+POST http://localhost:3000/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "companionCount": 3,
+  "children": false,
+  "startDate": "2024-06-19",
+  "endDate": "2024-07-20",
+  "countryList": [
+    {"name": "Россия"}
+  ],
+  "hashTags": ["#tag1", "#tag2"],
+  "transport": ["plane", "walk"]
+}
+
+###

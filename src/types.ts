@@ -25,3 +25,27 @@ export type ValidationErrorField = {
   value: string;
   messages: string[];
 }
+
+export enum Transport {
+  plane = 'plane',
+  bus = 'bus',
+  bike = 'bike',
+  walk = 'walk'
+}
+
+export type planningCountry = {
+  name: string;
+  description?: string;
+}
+
+export type UserCard = {
+  companionCount: number;
+  children: boolean;
+  startDate: string;
+  endDate: string;
+  countryList: planningCountry[];
+  hashTags?: string[];
+  transport: Transport[];
+}
+
+
