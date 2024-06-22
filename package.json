@@ -32,6 +32,8 @@
     "npm": ">=10"
   },
   "dependencies": {
+    "@fastify/swagger": "8.14.0",
+    "@fastify/swagger-ui": "4.0.0",
     "ajv-errors": "3.0.0",
     "dayjs": "1.11.11",
     "dotenv": "16.4.5",

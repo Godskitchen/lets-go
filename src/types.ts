@@ -38,7 +38,7 @@ export type planningCountry = {
   description?: string;
 }
 
-export type UserCard = {
+export type UserCardDto = {
   companionCount: number;
   children: boolean;
   startDate: string;
@@ -46,6 +46,20 @@ export type UserCard = {
   countryList: planningCountry[];
   hashTags?: string[];
   transport: Transport[];
+}
+
+export type UserCard = {
+  cardId: string;
+  name: string;
+  avatarUrl: string;
+  countryList: planningCountry[];
+  hashTags?: string[];
+  transport: Transport[];
+}
+
+export type ValidationFieldIssue = {
+  field?: string;
+  message?: string;
 }
 
 

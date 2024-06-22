@@ -1,12 +1,9 @@
 import Fastify, { FastifyRequest } from 'fastify';
-import { StatusCodes } from './utils/constants';
-import { getCountryList } from './modules/countries/country.service';
-import { CountriesQuery, CountriesQuerySchema, CountriesResponseSchema } from './modules/countries/country.schema';
-import { CountryListQueryParser } from './modules/countries/country.prehandler';
-import { CreateCardDtoSchema } from './modules/cards/card.schema';
 import addErrors from 'ajv-errors';
-import { CardDateValidationPrehandler } from './modules/cards/card.prehandler';
-import { v4 as uuidv4 } from 'uuid';
+import swagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import { countryController } from './modules/countries/country.controller';
+import { cardController } from './modules/cards/card.controller';
 
 const loggerOptions = {
   transport: {
@@ -34,7 +31,7 @@ const fastify = Fastify({
       removeAdditional: 'all',
       coerceTypes: 'array',
       useDefaults: true,
-      strictSchema: true,
+      strictSchema: false,
     },
     plugins: [addErrors]
   },
@@ -42,29 +39,37 @@ const fastify = Fastify({
 });
 
 
-// Declare a route
-fastify.get('/', async (_request, _reply) => ({ hello: 'world' }));
-fastify.get<{ Querystring: CountriesQuery }>(
-  '/countries',
-  {
-    schema: {querystring: CountriesQuerySchema, response: CountriesResponseSchema },
-    preHandler: CountryListQueryParser,
-  },
-  async ({query}, reply) => {
-    const countrylist = getCountryList(query);
-    reply.code(StatusCodes.OK).send(countrylist);
+await fastify.register(swagger, {
+  openapi: {
+    openapi: '3.1.0',
+    info: {
+      title: 'Test swagger',
+      description: 'Testing the Fastify swagger API',
+      version: '0.1.0'
+    },
+    tags: [
+      { name: 'countries', description: 'Описание действий со странами' },
+      { name: 'cards', description: 'Описание действий с карточками пользователей' }
+    ],
   }
-);
-fastify.post(
-  '/users',
-  {
-    schema: {body: CreateCardDtoSchema},
-    preHandler: CardDateValidationPrehandler
-  },
-  async (req, reply) => {
-    reply.code(StatusCodes.OK).send(uuidv4());
+});
+
+
+await fastify.register(countryController, {prefix: '/countries'});
+fastify.log.info('Countries routes added');
+
+await fastify.register(cardController, {prefix: '/cards'});
+fastify.log.info('Cards routes added');
+
+await fastify.register(fastifySwaggerUi, {
+  routePrefix: '/api',
+  uiConfig: {
+    layout: 'BaseLayout',
+    showCommonExtensions: false,
+    deepLinking: false,
   }
-);
+});
+fastify.log.info('Swagger UI generated');
 
 
 // Run the server!
