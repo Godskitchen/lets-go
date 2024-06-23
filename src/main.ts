@@ -45,8 +45,8 @@ await fastify.register(swagger, {
   openapi: {
     openapi: '3.1.0',
     info: {
-      title: 'Test swagger',
-      description: 'Testing the Fastify swagger API',
+      title: 'Let Go server',
+      description: 'Описание маршрутов для работы с сервером проекта "Поехали"',
       version: '0.1.0'
     },
     tags: [
