@@ -61,5 +61,6 @@ export async function cardController(fastify: FastifyInstance) {
           cardList: Array.from(cards)
         });
       }
-    });
+    }
+  );
 }

@@ -2,7 +2,7 @@ import Fastify, { FastifyRequest } from 'fastify';
 import addErrors from 'ajv-errors';
 import swagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
-import { countryController } from './modules/countries/country.controller';
+// import { countryController } from './modules/countries/country.controller';
 import { cardController } from './modules/cards/card.controller';
 import cors from '@fastify/cors';
 import { seedCardList } from './utils/helpers';
@@ -57,8 +57,8 @@ await fastify.register(swagger, {
 });
 
 
-await fastify.register(countryController, {prefix: '/countries'});
-fastify.log.info('Countries routes added');
+// await fastify.register(countryController, {prefix: '/countries'});
+// fastify.log.info('Countries routes added');
 
 await fastify.register(cardController, {prefix: '/cards'});
 fastify.log.info('Cards routes added');
