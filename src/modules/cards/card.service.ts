@@ -33,7 +33,7 @@ export const createNewCard = async (data: UserCardDto) => {
   CardPool.push(userCard);
 
   await createUserEntry(userCard);
-  return CardListById.get(newId);
+  return newId;
 };
 
 async function createUserEntry(userCard: UserCard) {

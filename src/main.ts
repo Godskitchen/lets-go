@@ -4,6 +4,8 @@ import swagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import { countryController } from './modules/countries/country.controller';
 import { cardController } from './modules/cards/card.controller';
+import cors from '@fastify/cors';
+import { seedCardList } from './utils/helpers';
 
 const loggerOptions = {
   transport: {
@@ -70,6 +72,12 @@ await fastify.register(fastifySwaggerUi, {
   }
 });
 fastify.log.info('Swagger UI generated');
+
+await seedCardList(100);
+fastify.log.info('Card pool seeded');
+
+
+await fastify.register(cors);
 
 
 // Run the server!

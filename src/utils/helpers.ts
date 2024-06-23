@@ -1,5 +1,6 @@
+import { CardPool } from '../db/cardlist';
 import { CountryNames } from '../db/countrylist';
-import { Transport, UserCard } from '../types';
+import { Transport, UserCard, planningCountry } from '../types';
 import { FemaleNames, FemaleSurnames, Genders, HashTags, MaleNames, MaleSurnames } from './mocks';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -86,4 +87,45 @@ export const generateMockCards = (count: number, srcCard: UserCard) => {
   }
 
   return mockCards;
+};
+
+export const seedCardList = async (count: number) => {
+  for (let i = 0; i < count; i++) {
+    const gender = getRandomArrItem(Genders);
+    const avatarUrl = `https://xsgames.co/randomusers/assets/avatars/${gender}/${getRandomNumber(1, 75)}.jpg`;
+
+    let name: string;
+    let surname: string;
+
+    if (gender === 'male') {
+      name = getRandomArrItem(MaleNames);
+      surname = getRandomArrItem(MaleSurnames);
+    } else {
+      name = getRandomArrItem(FemaleNames);
+      surname = getRandomArrItem(FemaleSurnames);
+    }
+
+    const mockCountriesCount = getRandomNumber(2, 4);
+    const mockCountriesList = new Set<planningCountry>();
+    while(mockCountriesList.size < mockCountriesCount) {
+      mockCountriesList.add({name: getRandomArrItem(CountryNames)});
+    }
+
+    const mockTransportCount = getRandomNumber(1, 4);
+    const mockTransportList = new Set<Transport>();
+    while(mockTransportList.size < mockTransportCount) {
+      mockTransportList.add(getRandomArrItem(Object.values(Transport)));
+    }
+
+    const mockCard: UserCard = {
+      cardId: uuidv4(),
+      name: `${name} ${surname}`,
+      avatarUrl,
+      countryList: Array.from(mockCountriesList),
+      transport: Array.from(mockTransportList),
+      hashTags: getRandomArrItems(HashTags, getRandomNumber(1, 6))
+    };
+
+    CardPool.push(mockCard);
+  }
 };

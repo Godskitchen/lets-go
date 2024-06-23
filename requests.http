@@ -26,3 +26,8 @@ Content-Type: application/json
 }
 
 ###
+
+# Get cards by UUId
+GET http://localhost:3000/cards/0d864f6f-79ba-4dd2-8673-7034f20f92f1 HTTP/1.1
+
+###

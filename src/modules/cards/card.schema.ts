@@ -2,6 +2,10 @@ import { CountryNames } from '../../db/countrylist';
 import { Transport } from '../../types';
 import { StatusCodes } from '../../utils/constants';
 
+export type CardsQuery = {
+  letters?: string;
+  continents?: string;
+}
 
 export const CreateCardDtoSchema = {
   type: 'object',
