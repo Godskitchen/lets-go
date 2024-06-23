@@ -32,7 +32,6 @@
   ],
   "exclude": [
     "node_modules",
-    "src/modules/countries/",
     "**/*.test.ts"
   ],
   "ts-node": {

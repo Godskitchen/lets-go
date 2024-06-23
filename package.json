@@ -6,9 +6,10 @@
   "scripts": {
     "start": "npm run build && node ./dist/main.js",
     "start:dev": "tsx watch ./src/main.ts",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && npm run fix",
     "lint": "eslint src/ --ext .ts",
     "compile": "tsc -p tsconfig.json",
+    "fix": "fix-esm-import-path ./dist/main.js",
     "clean": "rimraf dist"
   },
   "author": "Sergei Nazarov",
@@ -21,6 +22,7 @@
     "@typescript-eslint/parser": "7.12.0",
     "eslint": "^8.57.0",
     "eslint-config-htmlacademy": "10.0.1",
+    "fix-esm-import-path": "^1.10.0",
     "pino-pretty": "11.1.0",
     "rimraf": "5.0.7",
     "tsx": "^4.12.0",
