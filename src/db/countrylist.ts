@@ -97,7 +97,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Ангилья'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -139,7 +139,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Антигуа и Барбуда'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -153,7 +153,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Аргентина'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -181,7 +181,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Аруба'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -211,7 +211,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Багамские о-ва'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -239,7 +239,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Барбадос'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -281,7 +281,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Белиз'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -323,7 +323,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Бермудские о-ва'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -351,7 +351,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Боливия'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -365,7 +365,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Бонэйр'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -407,7 +407,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Бразилия'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -535,7 +535,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Венесуэла'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -579,7 +579,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гаити'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -593,7 +593,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гайана'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -635,7 +635,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гваделупа'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -649,7 +649,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гватемала'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -733,7 +733,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гондураc'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -761,7 +761,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гренада'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -775,7 +775,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Гренландия'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -875,7 +875,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Доминиканская Респ.'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -1151,7 +1151,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Каймановы о-ва'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -1193,7 +1193,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Канада'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -1305,7 +1305,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Колумбия'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -1361,7 +1361,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Коста-Рика'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -1389,7 +1389,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Куба'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -1445,7 +1445,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Кюрасао'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     }
@@ -1743,7 +1743,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Мартиника'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -1771,7 +1771,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Мексика'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -1855,7 +1855,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Монтсеррат'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -1983,7 +1983,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Никарагуа'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -2141,7 +2141,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Панама'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -2169,7 +2169,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Парагвай'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -2183,7 +2183,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Перу'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -2239,7 +2239,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Пуэрто-Рико'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     }
@@ -2328,7 +2328,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сальвадор'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -2412,7 +2412,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сен-Бартелеми'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2426,7 +2426,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сен-Пьер и Микелон'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2454,7 +2454,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сент-Винсент и Гренадины'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2468,7 +2468,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сент-Китс и Невис'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2482,7 +2482,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Сент-Люсия'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2524,7 +2524,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Синт-Мартен'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2622,7 +2622,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Суринам'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -2636,7 +2636,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'США'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: false
     },
@@ -2722,7 +2722,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'о-ва Теркс и Кайкос'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2792,7 +2792,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Тринидад и Тобаго'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },
@@ -2907,7 +2907,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Уругвай'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     }
@@ -2979,7 +2979,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Фолклендские о-ва'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: true
     },
@@ -3007,7 +3007,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Французская Гвиана'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -3111,7 +3111,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Чили'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     }
@@ -3171,7 +3171,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Эквадор'
       },
       continent: [
-        'South America'
+        'South_America'
       ],
       island: false
     },
@@ -3301,7 +3301,7 @@ export const SortedCountries: Record<string, Country[]> = {
         rus: 'Ямайка'
       },
       continent: [
-        'North America'
+        'North_America'
       ],
       island: true
     },

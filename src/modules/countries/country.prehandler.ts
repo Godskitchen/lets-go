@@ -5,7 +5,7 @@ import { Continent } from '../../types';
 export const CountryListQueryParser = (
   req: FastifyRequest<{Querystring: CountriesQuery}>,
   _: FastifyReply,
-  done: HookHandlerDoneFunction) => {
+  next: HookHandlerDoneFunction) => {
   const { letters, continents } = req.query;
   if (letters) {
     const letterArray = [...new Set(letters.split(','))].map((char) => char.trim().toUpperCase());
@@ -20,5 +20,5 @@ export const CountryListQueryParser = (
     const validContinents = continentArray.filter((continent) => (Object.values(Continent) as string[]).includes(continent));
     req.query.continents = validContinents.join(',');
   }
-  done();
+  next();
 };

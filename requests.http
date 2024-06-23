@@ -16,10 +16,10 @@ Content-Type: application/json
 {
   "companionCount": 3,
   "children": false,
-  "startDate": "2024-06-25",
+  "startDate": "2024-06-28",
   "endDate": "2024-07-20",
   "countryList": [
-    {"name": "Россия"}
+    {"name": "Уганда"}
   ],
   "hashTags": ["#tag1", "#tag2"],
   "transport": ["plane", "walk"]
@@ -28,6 +28,6 @@ Content-Type: application/json
 ###
 
 # Get cards by UUId
-GET http://localhost:3000/cards/0d864f6f-79ba-4dd2-8673-7034f20f92f1 HTTP/1.1
+GET http://localhost:3000/cards/53b74ec4-e35b-490b-984f-9f582d2ad810?continents=North_America,Asia HTTP/1.1
 
 ###

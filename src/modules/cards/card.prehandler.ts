@@ -1,7 +1,9 @@
 import { FastifyRequest, FastifyReply, HookHandlerDoneFunction } from 'fastify';
-import { UserCardDto, ValidationFieldIssue } from '../../types';
+import { Continent, UserCardDto, ValidationFieldIssue } from '../../types';
 import dayjs from 'dayjs';
 import { StatusCodes } from '../../utils/constants';
+import { GetCardsQuery } from './card.schema';
+import { CountryNames } from '../../db/countrylist';
 
 const MAX_TRIP_DAYS_DURATION = 31;
 
@@ -51,6 +53,26 @@ export const CardDateValidationPrehandler = (
       status: 'Bad request',
       issues: validationErrors
     });
+  }
+
+  next();
+};
+
+export const GetCardQueryParser = (
+  req: FastifyRequest<{Querystring: GetCardsQuery}>,
+  _: FastifyReply,
+  next: HookHandlerDoneFunction) => {
+  const { countries, continents } = req.query;
+  if (countries) {
+    const countryArray = [...new Set(countries.split(','))];
+    const validCountries = countryArray.filter((country) => CountryNames.includes(country));
+    req.query.countries = validCountries.join(',');
+  }
+
+  if (continents) {
+    const continentArray = [...new Set(continents.split(','))].map((continent) => continent.trim());
+    const validContinents = continentArray.filter((continent) => (Object.values(Continent) as string[]).includes(continent));
+    req.query.continents = validContinents.join(',');
   }
 
   next();

@@ -1,13 +1,14 @@
 import { CountryNames } from '../../db/countrylist';
-import { Transport } from '../../types';
+import { Continent, Transport } from '../../types';
 import { StatusCodes } from '../../utils/constants';
 
-export type CardsQuery = {
-  letters?: string;
+export type GetCardsQuery = {
+  countries?: string;
   continents?: string;
+  page: number;
 }
 
-export const CreateCardDtoSchema = {
+export const CreateCardBodySchema = {
   type: 'object',
   properties: {
     companionCount: {
@@ -178,6 +179,112 @@ export const ResponseNewCardSchema = {
           }
         }
       }
+    }
+  }
+} as const;
+
+export const GetCardsQuerySchema = {
+  type: 'object',
+  properties: {
+    countries: {
+      type: 'string',
+      description: 'Названия стран на русском языке через запятую. Посторонние значения автоматически удаляются и не учитываются в запросе',
+      example: 'Турция,Египет,Бразилия',
+    },
+    continents: {
+      type: 'string',
+      description: `Список континентов через запятую, Доступны значения из списка: ${Object.values(Continent).join(', ')}. Посторонние значения автоматически удаляются и не учитываются в запросе`,
+      example: 'Asia,Oceania'
+    },
+    page: {
+      type: 'integer',
+      minimum: 1,
+      description: 'Номер страницы списка. Целое число от 1. По умолчанию номер равен 1',
+      default: 1,
+      errorMessage: 'Номер страницы должен быть целым положительным числом'
+    }
+  },
+  additionalProperties: false,
+} as const;
+
+export const GetCardsParamSchema = {
+  type: 'object',
+  properties: {
+    cardId: {
+      type: 'string',
+      format: 'uuid',
+      description: 'Уникальный идентификатор карточки пользователя в формате uuid v4',
+      errorMessage: 'cardId должен быть в формате UUID'
+    }
+  },
+  required: ['cardId'],
+  additionalProperties: false,
+} as const;
+
+export const ResponseGetCardsSchema = {
+  [StatusCodes.OK]: {
+    type: 'object',
+    description: 'Получен набор карточек с учетом пагинации. Максимум 4 карточки. Также получено общее количество карточек с учетом возможных фильтров',
+    properties: {
+      cardList: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            cardId: {
+              type: 'string',
+              description: 'уникальный id карточки'
+            },
+            name: {
+              type: 'string',
+              description: 'Имя и фамилия'
+            },
+            avatarUrl: {
+              type: 'string',
+              description: 'url ссылка на аватар'
+            },
+            countryList: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string',
+                    description: 'Название страны на русском языке'
+                  },
+                  description: {
+                    type: 'string',
+                    description: 'Описание планов времяпровождения в данной стране. Необязательное поле'
+                  }
+                }
+              },
+              description: 'Список стран для посещения'
+            }
+          }
+        },
+        description: 'Набор карточек с учетом пагинации. Максимум 4 карточки'
+      },
+      totalCardsCount: {
+        type: 'integer',
+        description: 'Общее количество карточек с учетом возможных фильтров'
+      }
+    },
+  },
+  [StatusCodes.BAD_REQUEST]: {
+    type: 'object',
+    description: 'Ошибка валидации строки запроса',
+    properties: {
+      statusCode: {const: 400},
+      error: { const: 'Bad Request' },
+      message: { type: 'string' }
+    }
+  },
+  [StatusCodes.NOT_FOUND]: {
+    type: 'object',
+    description: 'Карточка пользователя не найдена',
+    properties: {
+      error: {const: '[404]: Not Found'},
+      message: { type: 'string' }
     }
   }
 } as const;

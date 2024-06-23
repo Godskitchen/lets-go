@@ -10,7 +10,7 @@ export const getCountryList = (filter?: CountriesQuery) => {
   const {letters, continents } = filter;
 
   const letterArray = letters?.split(',') || Object.keys(SortedCountries);
-  const continentArray = continents?.split(',').map((continent) => continent.replace('_', ' '));
+  const continentArray = continents?.split(',');
 
   const filteredCountries = letterArray.reduce((acc, letter) => {
     const countries = SortedCountries[letter];

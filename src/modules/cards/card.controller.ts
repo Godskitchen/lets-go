@@ -1,9 +1,8 @@
 import { FastifyInstance } from 'fastify';
 import { StatusCodes } from '../../utils/constants';
-import { CardDateValidationPrehandler } from './card.prehandler';
-import { CardsQuery, CreateCardDtoSchema, ResponseNewCardSchema } from './card.schema';
-import { createNewCard } from './card.service';
-import { CardListById } from '../../db/cardlist';
+import { CardDateValidationPrehandler, GetCardQueryParser } from './card.prehandler';
+import { GetCardsQuery, CreateCardBodySchema, GetCardsParamSchema, ResponseNewCardSchema, GetCardsQuerySchema, ResponseGetCardsSchema } from './card.schema';
+import { createNewCard, getCardsById } from './card.service';
 
 export async function cardController(fastify: FastifyInstance) {
   fastify.post(
@@ -12,7 +11,7 @@ export async function cardController(fastify: FastifyInstance) {
       schema: {
         tags: ['cards'],
         description: 'Создание новой карточки пользователя.',
-        body: CreateCardDtoSchema,
+        body: CreateCardBodySchema,
         response: ResponseNewCardSchema
       },
       preHandler: CardDateValidationPrehandler,
@@ -40,26 +39,27 @@ export async function cardController(fastify: FastifyInstance) {
     }
   );
 
-  fastify.get<{Querystring: CardsQuery, Params: {cardId: string}}>(
+  fastify.get<{Querystring: GetCardsQuery, Params: {cardId: string}}>(
     '/:cardId',
     {
       schema: {
         tags: ['countries'],
-        description: 'Получение списка карточек пользователей с учетом тех предпочтений, которые были указаны в форме. Возможна фильтрация по стране, а также по континенту. Также предусмотрена пагинация - по умолчанию отдается 4 первых карточки, включая основную карточку пользвоателя.',
-
-      }
+        description: 'Получение списка карточек пользователей с учетом тех предпочтений, которые были указаны в форме. Возможна фильтрация по странам, а также по континентам. Также предусмотрена пагинация - по умолчанию отдается 4 первых карточки, включая основную карточку пользвоателя.',
+        params: GetCardsParamSchema,
+        querystring: GetCardsQuerySchema,
+        response: ResponseGetCardsSchema
+      },
+      preHandler: GetCardQueryParser
     },
-    async({params}, reply) => {
-      const cards = CardListById.get(params.cardId);
+    async({params, query}, reply) => {
+      const cards = await getCardsById(params.cardId, query);
       if (!cards) {
         reply.code(StatusCodes.NOT_FOUND).send({
           error: '[404]: Not Found',
           message: 'Карточка пользователя с таким id не найдена'
         });
       } else {
-        reply.code(StatusCodes.OK).send({
-          cardList: Array.from(cards)
-        });
+        reply.code(StatusCodes.OK).send(cards);
       }
     }
   );
