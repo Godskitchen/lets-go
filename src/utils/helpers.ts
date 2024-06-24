@@ -1,6 +1,6 @@
 import { CardPool } from '../db/cardlist';
-import { CountryNames } from '../db/countrylist';
-import { Transport, UserCard, planningCountry } from '../types';
+import { Countries } from '../db/countrylist';
+import { Transport, UserCard, CardCountry } from '../types';
 import { FemaleNames, FemaleSurnames, Genders, HashTags, MaleNames, MaleSurnames } from './mocks';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -64,11 +64,11 @@ export const generateMockCards = (count: number, srcCard: UserCard) => {
     const countryMatchesCount = Math.min(getRandomNumber(1, srcCard.countryList.length), mockCountriesCount);
     const mockCountriesList = new Set(getRandomArrItems(srcCard.countryList, countryMatchesCount));
     while(mockCountriesList.size < mockCountriesCount) {
-      mockCountriesList.add({name: getRandomArrItem(CountryNames)});
+      mockCountriesList.add({countryData: getRandomArrItem(Countries)});
     }
 
     const mockTransportCount = getRandomNumber(1, 4);
-    const transportMatchesCount = Math.min(getRandomNumber(1, srcCard.transport.length), mockCountriesCount);
+    const transportMatchesCount = Math.min(getRandomNumber(1, srcCard.transport.length), mockTransportCount);
     const mockTransportList = new Set(getRandomArrItems(srcCard.transport, transportMatchesCount));
     while(mockTransportList.size < mockTransportCount) {
       mockTransportList.add(getRandomArrItem(Object.values(Transport)));
@@ -106,9 +106,9 @@ export const seedCardList = async (count: number) => {
     }
 
     const mockCountriesCount = getRandomNumber(2, 4);
-    const mockCountriesList = new Set<planningCountry>();
+    const mockCountriesList = new Set<CardCountry>();
     while(mockCountriesList.size < mockCountriesCount) {
-      mockCountriesList.add({name: getRandomArrItem(CountryNames)});
+      mockCountriesList.add({countryData: getRandomArrItem(Countries)});
     }
 
     const mockTransportCount = getRandomNumber(1, 4);

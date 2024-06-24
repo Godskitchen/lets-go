@@ -3322,6 +3322,9 @@ export const SortedCountries: Record<string, Country[]> = {
   ]
 };
 
+export const Countries = Object.values(SortedCountries).flat();
+
+
 export const CountryNames = Object.values(SortedCountries).reduce<string[]>((rusNames, countries) => {
   const names = countries.map((country) => country.name.rus);
   return rusNames.concat(names);

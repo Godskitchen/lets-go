@@ -248,9 +248,30 @@ export const ResponseGetCardsSchema = {
               items: {
                 type: 'object',
                 properties: {
-                  name: {
-                    type: 'string',
-                    description: 'Название страны на русском языке'
+                  countryData: {
+                    type: 'object',
+                    description: 'Информация о стране',
+                    properties: {
+                      flags: {
+                        type: 'object',
+                        properties: {
+                          png: { type: 'string' },
+                          svg: { type: 'string' }
+                        }
+                      },
+                      name: {
+                        type: 'object',
+                        properties: {
+                          common: { type: 'string' },
+                          rus: { type: 'string' }
+                        }
+                      },
+                      continent: {
+                        type: 'array',
+                        items: { type: 'string' }
+                      },
+                      island: {type: 'boolean'}
+                    }
                   },
                   description: {
                     type: 'string',
@@ -259,7 +280,21 @@ export const ResponseGetCardsSchema = {
                 }
               },
               description: 'Список стран для посещения'
+            },
+            hashTags: {
+              type: 'array',
+              description: 'Набор тегов',
+              items: { type: 'string'}
+            },
+            transport: {
+              type: 'array',
+              description: 'Список предпочитаемого транспорта',
+              items: {
+                type: 'string',
+                enum: Object.values(Transport)
+              }
             }
+
           }
         },
         description: 'Набор карточек с учетом пагинации. Максимум 4 карточки'

@@ -1,10 +1,10 @@
-import { UserCard, UserCardDto } from '../../types';
+import { Country, UserCard, UserCardDto } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 import { generateMockCards, getRandomArrItem, getRandomArrItems, getRandomNumber } from '../../utils/helpers';
 import { FemaleNames, FemaleSurnames, Genders, MaleNames, MaleSurnames } from '../../utils/mocks';
 import { CardListById, CardPool } from '../../db/cardlist';
 import { GetCardsQuery } from './card.schema';
-import { SortedCountries } from '../../db/countrylist';
+import { Countries } from '../../db/countrylist';
 import { taskQueue } from '../../utils/task-queue';
 
 
@@ -24,11 +24,16 @@ export const createNewCard = async (data: UserCardDto) => taskQueue.enqueue(asyn
     surname = getRandomArrItem(FemaleSurnames);
   }
 
+  const countryList = data.countryList.map((country) => ({
+    countryData: Countries.find((countryInList) => countryInList.name.rus === country.name) as Country,
+    description: country.description
+  }));
+
   const userCard: UserCard = {
     cardId: newId,
     name: `${name} ${surname}`,
     avatarUrl,
-    countryList: data.countryList,
+    countryList,
     hashTags: data.hashTags,
     transport: data.transport
   };
@@ -55,20 +60,17 @@ export const getCardsById = async (id: string, query: GetCardsQuery) => taskQueu
   const continentFilterList = continents?.split(',') ?? [];
 
   if (countryFilterList.length || continentFilterList.length) {
-    selected = selected.filter(({countryList: countryListFromCards}) => {
+    selected = selected.filter(({countryList: countriesCard}) => {
       let isMatch = false;
-      for (const country of countryListFromCards) {
-        if (countryFilterList.includes(country.name)) {
+      for (const country of countriesCard) {
+        if (countryFilterList.includes(country.countryData.name.rus)) {
           isMatch = true;
           break;
         }
 
-        if (continentFilterList.length) {
-          const countryData = Object.values(SortedCountries).flat().find((countryInList) => countryInList.name.rus === country.name);
-          if (countryData && (continentFilterList.includes(countryData.continent[0]) || continentFilterList.includes(countryData.continent[1]))) {
-            isMatch = true;
-            break;
-          }
+        if (continentFilterList.includes(country.countryData.continent[0]) || continentFilterList.includes(country.countryData.continent[1])) {
+          isMatch = true;
+          break;
         }
       }
 
@@ -88,7 +90,7 @@ export const getCardsById = async (id: string, query: GetCardsQuery) => taskQueu
 function createUserEntry(userCard: UserCard) {
   taskQueue.enqueue(async () => {
     const userId = userCard.cardId;
-    const userCountries = userCard.countryList.map((country) => country.name);
+    const userCountries = userCard.countryList.map((country) => country.countryData.name.common);
     const userTransport = userCard.transport;
 
     const selectedCards = new Set<UserCard>();
@@ -106,7 +108,7 @@ function createUserEntry(userCard: UserCard) {
       });
 
       card.countryList.forEach((country) => {
-        if (userCountries.includes(country.name)) {
+        if (userCountries.includes(country.countryData.name.rus)) {
           isCountryMatch = true;
         }
       });
@@ -116,9 +118,6 @@ function createUserEntry(userCard: UserCard) {
 
     const slicedFilteredPool = getRandomArrItems(filteredPool, SELECTED_CARDS_COUNT);
     slicedFilteredPool.forEach((card) => selectedCards.add(card));
-
-    console.log('card pool length', CardPool.length);
-    console.log(selectedCards.size);
 
     if (selectedCards.size < SELECTED_CARDS_COUNT) {
       const requiredCount = SELECTED_CARDS_COUNT - selectedCards.size;

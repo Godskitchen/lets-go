@@ -1,11 +1,11 @@
 export type Country = {
-  flags: {
-    png: string;
-    svg: string;
-  },
   name: {
     common: string;
     rus: string
+  },
+  flags: {
+    png: string;
+    svg: string;
   },
   continent: string[];
   island: boolean;
@@ -33,8 +33,8 @@ export enum Transport {
   walk = 'walk'
 }
 
-export type planningCountry = {
-  name: string;
+export type CardCountry = {
+  countryData: Country;
   description?: string;
 }
 
@@ -43,7 +43,10 @@ export type UserCardDto = {
   children: boolean;
   startDate: string;
   endDate: string;
-  countryList: planningCountry[];
+  countryList: {
+    name: string;
+    description?: string;
+  }[];
   hashTags?: string[];
   transport: Transport[];
 }
@@ -52,7 +55,7 @@ export type UserCard = {
   cardId: string;
   name: string;
   avatarUrl: string;
-  countryList: planningCountry[];
+  countryList: CardCountry[];
   hashTags?: string[];
   transport: Transport[];
 }
